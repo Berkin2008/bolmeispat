@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bölme İspat Uygulaması</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen flex items-center justify-center p-4">
+    <div class="bg-slate-800 p-6 rounded-2xl shadow-2xl max-w-md w-full border border-slate-700">
+        <h1 class="text-2xl font-bold text-center text-indigo-400 mb-2">Bölme İspatı Uygulaması</h1>
+        <p class="text-slate-400 text-sm text-center mb-6">Girdiğiniz iki sayının bölme işlemini ve matematiksel ispatını yapar.</p>
+        
+        <div class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium mb-1 text-slate-300">İlk Sayı (Bölünen)</label>
+                <input type="number" id="sayi1" placeholder="Örn: 25" class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium mb-1 text-slate-300">İkinci Sayı (Bölen)</label>
+                <input type="number" id="sayi2" placeholder="Örn: 4" class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-indigo-500">
+            </div>
+
+            <button onclick="hesapla()" class="w-full bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition duration-200 shadow-lg">
+                Bölme İspatını Yap
+            </button>
+        </div>
+
+        <div id="sonucAlani" class="mt-6 hidden bg-slate-900/80 p-4 rounded-xl border border-indigo-500/30">
+            <h2 class="font-semibold text-lg text-indigo-300 mb-2 border-b border-slate-700 pb-1">Sonuçlar</h2>
+            <div id="sonucIcerik" class="space-y-2 text-sm"></div>
+        </div>
+    </div>
+
+    <script>
+        function hesapla() {
+            const s1 = parseInt(document.getElementById('sayi1').value);
+            const s2 = parseInt(document.getElementById('sayi2').value);
+            const sonucAlani = document.getElementById('sonucAlani');
+            const sonucIcerik = document.getElementById('sonucIcerik');
+
+            if (isNaN(s1) || isNaN(s2)) {
+                alert("Lütfen geçerli iki sayı giriniz!");
+                return;
+            }
+
+            if (s2 === 0) {
+                sonucAlani.classList.remove('hidden');
+                sonucIcerik.innerHTML = `<p class="text-red-400 font-semibold">Hata: Bir sayı 0'a bölünemez!</p>`;
+                return;
+            }
+
+            const bolmesonuc = Math.floor(s1 / s2);
+            const modsonuc = s1 % s2;
+            const carpim = bolmesonuc * s2;
+            const toplamasonuc = carpim + modsonuc;
+
+            sonucIcerik.innerHTML = `
+                <p><span class="text-slate-400">Bölme Sonucunuz:</span> <strong class="text-green-400">${toplamasonuc}</strong></p>
+                <div class="mt-3 pt-2 border-t border-slate-800">
+                    <p class="font-semibold text-indigo-400 mb-1">İspat Adımları:</p>
+                    <p class="font-mono bg-slate-950 p-2 rounded text-xs text-indigo-200 mb-1">
+                        ${bolmesonuc} (bölüm) x ${s2} = ${carpim}
+                    </p>
+                    <p class="font-mono bg-slate-950 p-2 rounded text-xs text-indigo-200">
+                        ${carpim} + ${modsonuc} (kalan) = <strong class="text-emerald-400">${toplamasonuc}</strong> (ilk girdiğiniz sayı)
+                    </p>
+                </div>
+            `;
+            sonucAlani.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
