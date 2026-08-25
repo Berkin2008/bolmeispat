@@ -54,7 +54,7 @@
                 return;
             }
 
-            const bolmesonuc = Math.floor(s1 / s2);
+            const bolmesonuc = (s1 / s2).toFixed(2);
             const modsonuc = s1 % s2;
             const carpim = bolmesonuc * s2;
             const toplamasonuc = carpim + modsonuc;
