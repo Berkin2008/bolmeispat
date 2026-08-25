@@ -55,8 +55,9 @@
             }
 
             const bolmesonuc = (s1 / s2).toFixed(2);
+            const bolmetamsayi = Math.floor(s1 / s2);
             const modsonuc = s1 % s2;
-            const carpim = bolmesonuc * s2;
+            const carpim = bolmetamsayi * s2;
             const toplamasonuc = carpim + modsonuc;
 
             sonucIcerik.innerHTML = `
@@ -64,7 +65,7 @@
                 <div class="mt-3 pt-2 border-t border-slate-800">
                     <p class="font-semibold text-indigo-400 mb-1">İspat Adımları:</p>
                     <p class="font-mono bg-slate-950 p-2 rounded text-xs text-indigo-200 mb-1">
-                        ${bolmesonuc} (bölüm) x ${s2} = ${carpim}
+                        ${bolmetamsayi} (bölüm) x ${s2} = ${carpim}
                     </p>
                     <p class="font-mono bg-slate-950 p-2 rounded text-xs text-indigo-200">
                         ${carpim} + ${modsonuc} (kalan) = <strong class="text-emerald-400">${toplamasonuc}</strong> (ilk girdiğiniz sayı)
